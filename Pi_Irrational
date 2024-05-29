@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pylab as plt
+import matplotlib.animation as anim
+from myfunctions import *
+
+r1 = 1
+r2 = 1
+
+
+w1 = 1
+w2 = np.pi
+
+p1 = 0
+p2 = 0
+
+
+fig, ax = initFigureWindow() 
+trace = initLine(ax)
+theta = np.linspace(0, 30 * np.pi, 2000) 
+
+z = ( r1 * np.exp((theta * w1 + p1) * 1j) 
+    + r2 * np.exp((theta * w2 + p2) * 1j) )
+
+ax.axis([-10, 10, -10, 10])    # [ -x , x , -y , y ]
+
+myanimation = anim.FuncAnimation(fig, 
+                                 lambda frame: spiroanimation(frame, trace, z), 
+                                 frames = 1000, 
+                                 interval = 1)
+
+plt.show()
+
+
